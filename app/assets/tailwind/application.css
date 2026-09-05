@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@utility bg-dotted {
+  background-color: black;
+  /* background-color: red; */
+  background-image: radial-gradient(#151515 2px, transparent 2px);
+  background-size: 40px 40px;
+}
+
+@utility bg-graph-paper {
+  background-color: white;
+  background-image:
+    linear-gradient(#d0d0d0 1px, transparent 1px),
+    linear-gradient(90deg, #d0d0d0 1px, transparent 1px);
+  background-size: 32px 32px;
+}
