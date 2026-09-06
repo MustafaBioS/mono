@@ -1,26 +1,65 @@
 <%# app/views/landing/index.html.erb %>
 
 <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<% colors = ["blue", "purple", "pink", "red", "orange", "yellow", "green", "cyan", "brown", "grey"] %>
 
-<main class="bg-dotted min-h-screen">
-  <div class="flex flex-row w-full justify-between items-center">
-    <%= image_tag "flag-standalone-bw.png", alt: "Hackclub Flag", class: "w-42 ml-10" %>
-    <div class="grid grid-rows-2 grid-cols-5 gap-0 justify-items-center">
-      <%= image_tag "colors/blue.png", alt: "Blue", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/purple.png", alt: "Purple", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/pink.png", alt: "Pink", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/red.png", alt: "Red", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/orange.png", alt: "Orange", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/yellow.png", alt: "Yellow", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/green.png", alt: "Green", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/cyan.png", alt: "Cyan", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/brown.png", alt: "Brown", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
-      <%= image_tag "colors/grey.png", alt: "Grey", class: "w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer" %>
+<div class="relative min-h-screen flex flex-col" data-controller="color-picker">
+  <main class="bg-dotted flex-[0.85]">
+    <div class="flex flex-row w-full justify-between items-center">
+      <%= image_tag "flag-standalone-bw.png", alt: "Hackclub Flag", class: "w-42 ml-10" %>
+      <div class="grid grid-rows-2 grid-cols-5 gap-0 justify-items-center">
+
+        <% colors.each do |color| %>
+          <% if color == "blue" %>
+            <%= image_tag "picked-colors/#{color}-splat.png",
+              alt: color.capitalize,
+              draggable: false,
+              class: "select-none w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer",
+              data: {
+                color_picker_target: "color",
+                color: color,
+                normal_src: asset_path("colors/#{color}.png"),
+                picked_src: asset_path("picked-colors/#{color}-splat.png"),
+                action: "click->color-picker#pick"
+              } %>
+          <% else %>
+            <%= image_tag "colors/#{color}.png", 
+                alt: color.capitalize, 
+                class: "select-none w-16 h-16 transition-all duration-300 ease hover:opacity-70 cursor-pointer",
+                draggable: false,
+                data: {
+                  color_picker_target: "color",
+                  color: color,
+                  normal_src: asset_path("colors/#{color}.png"),
+                  picked_src: asset_path("picked-colors/#{color}-splat.png"),
+                  action: "click->color-picker#pick"
+                } %>
+            <% end %>
+          <% end %>
+      </div>
     </div>
-  </div>
-</main>
+    <h1 class="text-white mt-42 pb-24 text-center text-4xl font-bold">Make monochromatic projects,<br> join a free mailclub and get prizes.</h1>
+  </main>
 
-<div
-  class="bg-graph-paper min-h-screen"
->
+  <div class="bg-graph-paper flex-[1.15] relative">
+    <%= image_tag "mono/mono-blue.png",
+      alt: "Mono Logo",
+      data: {
+        color_picker_target: "logo",
+        blue_src: asset_path("mono/mono-blue.png"),
+        purple_src: asset_path("mono/mono-purple.png"),
+        pink_src: asset_path("mono/mono-pink.png"),
+        red_src: asset_path("mono/mono-red.png"),
+        orange_src: asset_path("mono/mono-orange.png"),
+        yellow_src: asset_path("mono/mono-yellow.png"),
+        green_src: asset_path("mono/mono-green.png"),
+        cyan_src: asset_path("mono/mono-cyan.png"),
+        brown_src: asset_path("mono/mono-brown.png"),
+        grey_src: asset_path("mono/mono-grey.png")
+      },
+      class: "absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-3/4 z-10" 
+    %>
+  </div>
+
+  
 </div>

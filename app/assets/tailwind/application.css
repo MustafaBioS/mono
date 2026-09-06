@@ -2,7 +2,6 @@
 
 @utility bg-dotted {
   background-color: black;
-  /* background-color: red; */
   background-image: radial-gradient(#151515 2px, transparent 2px);
   background-size: 40px 40px;
 }
